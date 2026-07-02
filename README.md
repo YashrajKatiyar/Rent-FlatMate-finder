@@ -64,20 +64,22 @@ rent-flatmate-finder/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
+git clone https://github.com/YashrajKatiyar/Rent-FlatMate-finder.git
 ```
 
 ### Backend Setup
 
 ```bash
+cd rent-flatmate-finder
 cd backend
 npm install
-npm start
+npm run dev
 ```
 
 ### Frontend Setup
 
 ```bash
+cd rent-flatmate-finder
 cd frontend
 npm install
 npm run dev
@@ -90,18 +92,19 @@ npm run dev
 Create a `.env` file inside the backend folder.
 
 ```env
+## 🔑 Environment Variables
+
+```env
 PORT=5000
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
+
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
+
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=7d
+
 ```
-
----
-
-## 📸 Screenshots
-
-(Add screenshots here after uploading them.)
-
----
 
 ## 👨‍💻 Author
 
