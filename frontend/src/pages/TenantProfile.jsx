@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import api from '../services/api';
+import "./TenantProfile.css";
 
 export default function TenantProfile() {
   const [form, setForm] = useState({
@@ -45,21 +46,35 @@ export default function TenantProfile() {
       setLoading(false);
     }
   };
+return (
+  <div className="profile-page">
+    <div className="profile-card">
 
-  return (
-    <div className="page">
-      <h2>My Tenant Profile</h2>
-      <p className="hint">This drives your AI compatibility score against room listings.</p>
+      <h1>My Tenant Profile</h1>
+
+      <p>
+        This profile helps our AI recommend the best rooms for you.
+      </p>
+
       {message && <p className="success">{message}</p>}
       {error && <p className="error">{error}</p>}
-      <form className="card-form" onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit}>
+
         <label>Preferred Location</label>
         <input
           required
           value={form.preferredLocation}
-          onChange={(e) => setForm({ ...form, preferredLocation: e.target.value })}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              preferredLocation: e.target.value,
+            })
+          }
         />
-        <div className="row">
+
+        <div className="form-row">
+
           <div>
             <label>Budget Min</label>
             <input
@@ -67,9 +82,15 @@ export default function TenantProfile() {
               required
               min={0}
               value={form.budgetMin}
-              onChange={(e) => setForm({ ...form, budgetMin: e.target.value })}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  budgetMin: e.target.value,
+                })
+              }
             />
           </div>
+
           <div>
             <label>Budget Max</label>
             <input
@@ -77,23 +98,48 @@ export default function TenantProfile() {
               required
               min={0}
               value={form.budgetMax}
-              onChange={(e) => setForm({ ...form, budgetMax: e.target.value })}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  budgetMax: e.target.value,
+                })
+              }
             />
           </div>
+
         </div>
+
         <label>Move-in Date</label>
         <input
           type="date"
           required
           value={form.moveInDate}
-          onChange={(e) => setForm({ ...form, moveInDate: e.target.value })}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              moveInDate: e.target.value,
+            })
+          }
         />
-        <label>Notes (optional)</label>
-        <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+
+        <label>Notes (Optional)</label>
+        <textarea
+          value={form.notes}
+          onChange={(e) =>
+            setForm({
+              ...form,
+              notes: e.target.value,
+            })
+          }
+        />
+
         <button type="submit" disabled={loading}>
-          {loading ? 'Saving...' : 'Save Profile'}
+          {loading ? "Saving..." : "Save Profile"}
         </button>
+
       </form>
+
     </div>
-  );
+  </div>
+);
 }

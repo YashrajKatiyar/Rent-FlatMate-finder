@@ -1,5 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { FaHouseUser } from "react-icons/fa";
+import "./Navbar.css";
 
 export default function NavBar() {
   const { user, logout } = useAuth();
@@ -7,40 +9,64 @@ export default function NavBar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
     <nav className="navbar">
-      <Link to="/" className="brand">Rent &amp; Flatmate Finder</Link>
+
+      <div className="logo">
+
+        <FaHouseUser />
+        <div className="logo-text">
+          <Link to="/">RentMate AI</Link>
+          <span>Smart Flatmate Matching</span>
+        </div>
+      </div>
+
       <div className="nav-links">
+
         {!user && (
           <>
             <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+
+            <Link className="register-btn" to="/register">
+              Register
+            </Link>
           </>
         )}
-        {user?.role === 'tenant' && (
+
+        {user?.role === "tenant" && (
           <>
-            <Link to="/tenant">Browse Listings</Link>
-            <Link to="/tenant/profile">My Profile</Link>
-            <Link to="/tenant/interests">My Interests</Link>
+            <Link to="/tenant">Dashboard</Link>
+            <Link to="/tenant/profile">Profile</Link>
+            <Link to="/tenant/interests">Interests</Link>
           </>
         )}
-        {user?.role === 'owner' && (
+
+        {user?.role === "owner" && (
           <>
-            <Link to="/owner">My Listings</Link>
-            <Link to="/owner/interests">Received Interests</Link>
+            <Link to="/owner">Dashboard</Link>
+            <Link to="/owner/interests">Requests</Link>
           </>
         )}
-        {user?.role === 'admin' && <Link to="/admin">Admin Panel</Link>}
-        {user && <Link to="/chat">Chat</Link>}
+
+        {user?.role === "admin" && (
+          <Link to="/admin">Admin</Link>
+        )}
+
         {user && (
-          <button className="link-btn" onClick={handleLogout}>
-            Logout ({user.name})
-          </button>
+          <>
+            <Link to="/chat">Chat</Link>
+
+            <button onClick={handleLogout}>
+              Logout
+            </button>
+          </>
         )}
+
       </div>
+
     </nav>
   );
 }

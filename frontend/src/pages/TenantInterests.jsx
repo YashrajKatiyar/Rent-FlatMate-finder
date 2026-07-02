@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import api from '../services/api';
+import { useState, useEffect } from "react";
+import api from "../services/api";
+import "./TenantInterests.css";
 
 export default function TenantInterests() {
   const [interests, setInterests] = useState([]);
@@ -7,42 +8,23 @@ export default function TenantInterests() {
 
   useEffect(() => {
     api
-      .get('/interests/sent')
+      .get("/interests/sent")
       .then((res) => setInterests(res.data.data))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="page">Loading...</p>;
+  if (loading)
+    return (
+      <div className="interest-page">
+        <div className="interest-card">
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    );
 
   return (
-    <div className="page">
-      <h2>My Interest Requests</h2>
-      {interests.length === 0 ? (
-        <p>You haven't expressed interest in any listings yet.</p>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Rent</th>
-              <th>Compatibility</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {interests.map((i) => (
-              <tr key={i._id}>
-                <td>{i.listing?.location}</td>
-                <td>₹{i.listing?.rent}</td>
-                <td>{i.compatibilityScore ? `${i.compatibilityScore.score}/100` : '—'}</td>
-                <td>
-                  <span className={`status-pill ${i.status}`}>{i.status}</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
+  <div style={{ padding: "50px", background: "red", color: "white" }}>
+    <h1>NEW TENANT PROFILE</h1>
+  </div>
+);
 }
