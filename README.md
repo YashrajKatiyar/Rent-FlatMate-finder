@@ -46,7 +46,7 @@ rent-flatmate-finder/
 ├── backend/
 │   ├── src/
 │   ├── package.json
-│   └── .env
+│   └── .env.example
 │
 ├── frontend/
 │   ├── src/
@@ -90,9 +90,6 @@ npm run dev
 ## 🔑 Environment Variables
 
 Create a `.env` file inside the backend folder.
-
-```env
-## 🔑 Environment Variables
 
 ```env
 PORT=5000
